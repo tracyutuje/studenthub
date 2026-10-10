@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#7544c8">
+  <meta name="description" content="StudentHub: learn, connect and grow together.">
+  <title>StudentHub | Your Learning Community</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="StudentHub home">
+      <span class="brand-icon">S</span> StudentHub
+    </a>
+    <div class="top-actions">
+      <span id="welcome">Your student community ✨</span>
+      <button id="accountBtn" class="btn btn-primary">Log in / Join</button>
+      <button id="logoutBtn" class="btn hidden">Log out</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">YOUR SPACE TO SHINE ✦</span>
+      <h1>Learn together.<br><span>Grow together.</span></h1>
+      <p>Find your study people, share ideas, celebrate progress
+         and make your learning journey brighter.</p>
+      <button class="btn btn-primary" id="heroJoin">Join the community →</button>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="sun"></div>
+      <div class="book book-one">✎</div>
+      <div class="book book-two">✦</div>
+      <div class="hero-note">Small steps.<br>Big futures. ♡</div>
+    </div>
+  </section>
+
+  <main class="layout">
+    <aside class="sidebar card">
+      <div class="mini-profile">
+        <div class="avatar" id="myAvatar">S</div>
+        <div>
+          <strong id="myName">Guest learner</strong>
+          <p id="mySchool">Your learning journey starts here</p>
+        </div>
+      </div>
+      <nav class="navigation" aria-label="Main navigation">
+        <button class="nav-btn active" data-page="feed">🏡 <span>Home feed</span></button>
+        <button class="nav-btn" data-page="discover">💜 <span>Find study friends</span></button>
+        <button class="nav-btn" data-page="messages">💬 <span>Messages</span><span id="msgCount" class="count"></span></button>
+        <button class="nav-btn" data-page="resources">📚 <span>Study corner</span></button>
+        <button class="nav-btn" data-page="profile">🌷 <span>My profile</span></button>
+      </nav>
+      <div class="sidebar-note">
+        <span>🌸</span>
+        <strong>You belong here.</strong>
+        <p>Every expert was once a learner.</p>
+      </div>
+    </aside>
+
+    <section class="content">
+      <div id="feedPage" class="page">
+        <div class="section-heading">
+          <div><span class="eyebrow">THE COMMUNITY</span><h2>Your home feed</h2></div>
+          <span class="pill">A little progress every day ✨</span>
+        </div>
+
+        <form id="postForm" class="card composer">
+          <label for="postText">What would you like to share?</label>
+          <textarea id="postText" maxlength="500"
+            placeholder="Share a study tip, a goal or something you learned today..." required></textarea>
+          <div class="composer-bottom">
+            <span class="muted">Be kind. Inspire someone. 🌷</span>
+            <button class="btn btn-primary" type="submit">Share post ↗</button>
+          </div>
+        </form>
+        <div id="feedList" class="stack"></div>
+      </div>
+
+      <div id="discoverPage" class="page hidden">
+        <div class="section-heading">
+          <div><span class="eyebrow">BETTER TOGETHER</span><h2>Find your people</h2></div>
+        </div>
+        <p class="muted">Discover sample learner profiles and send a study-friend request.</p>
+        <input id="friendSearch" class="search" placeholder="Search by name or subject..." aria-label="Search learners">
+        <div id="peopleList" class="people-grid"></div>
+      </div>
+
+      <div id="messagesPage" class="page hidden">
+        <div class="section-heading">
+          <div><span class="eyebrow">LET'S CONNECT</span><h2>Your messages</h2></div>
+        </div>
+        <div class="card chat-card">
+          <div id="chatNotice" class="chat-notice">
+            <span class="chat-icon">💌</span>
+            <h3>Your conversation space</h3>
+            <p>Choose a sample learner below to try the messaging demo.</p>
+          </div>
+          <div id="chatArea" class="hidden">
+            <div id="chatTitle" class="chat-title"></div>
+            <div id="chatLog" class="chat-log" aria-live="polite"></div>
+            <form id="chatForm" class="chat-form">
+              <input id="chatInput" maxlength="500" placeholder="Write a friendly message..." required>
+              <button class="btn btn-primary" type="submit">Send ↗</button>
+            </form>
+          </div>
+        </div>
+        <h3 class="subheading">Start a conversation</h3>
+        <div id="chatPeople" class="people-grid"></div>
+      </div>
+
+      <div id="resourcesPage" class="page hidden">
+     
+<div class="study-dashboard">
+  <div class="study-welcome">
+    <span class="eyebrow">YOUR LEARNING SPACE</span>
+    <h3>Learn at your own pace.</h3>
+    <p>Focus, create quizzes, and keep all your revision notes together.</p>
+  </div>
+
+  <div class="study-stats">
+    <article class="study-stat">
+      <span>⏱️</span>
+      <p>Focus minutes</p>
+      <strong id="focusMinutes">0</strong>
+    </article>
+    <article class="study-stat">
+      <span>📝</span>
+      <p>Saved notes</p>
+      <strong id="notesCount">0</strong>
+    </article>
+    <article class="study-stat">
+      <span>✏️</span>
+      <p>My quizzes</p>
+      <strong id="myQuizCount">0</strong>
+    </article>
+  </div>
+
+  <div class="study-tools">
+    <article class="card study-tool">
+      <h3>⏳ Focus timer</h3>
+      <p>Choose a time, start studying, and pause whenever you need.</p>
+      <label for="timerLength">Session length</label>
+      <select id="timerLength">
+        <option value="15">15 minutes</option>
+        <option value="25" selected>25 minutes</option>
+        <option value="45">45 minutes</option>
+      </select>
+      <div id="timerDisplay" class="timer-display" role="timer"
+           aria-live="off">25:00</div>
+      <div class="study-controls">
+        <button class="btn btn-primary" id="startTimer" type="button">Start</button>
+        <button class="btn btn-soft" id="resetTimer" type="button">Reset</button>
+      </div>
+      <p id="timerMessage" aria-live="polite">Ready when you are!</p>
+    </article>
+
+    <article class="card study-tool">
+      <h3>✏️ Create a quiz</h3>
+      <p>Write your own question, provide four choices, and select the correct answer.</p>
+
+      <form id="createQuizForm">
+        <label for="newQuizTitle">Quiz title</label>
+        <input id="newQuizTitle" maxlength="80"
+               placeholder="e.g. Physics revision" required>
+
+        <label for="newQuizQuestion">Your question</label>
+        <textarea id="newQuizQuestion" maxlength="500"
+                  placeholder="Write your question..." required></textarea>
+
+        <label for="quizOption1">Choice 1</label>
+        <input id="quizOption1" maxlength="150" required>
+
+        <label for="quizOption2">Choice 2</label>
+        <input id="quizOption2" maxlength="150" required>
+
+        <label for="quizOption3">Choice 3</label>
+        <input id="quizOption3" maxlength="150" required>
+
+        <label for="quizOption4">Choice 4</label>
+        <input id="quizOption4" maxlength="150" required>
+
+        <label for="correctQuizAnswer">Correct choice</label>
+        <select id="correctQuizAnswer" required>
+          <option value="0">Choice 1</option>
+          <option value="1">Choice 2</option>
+          <option value="2">Choice 3</option>
+          <option value="3">Choice 4</option>
+        </select>
+
+        <button class="btn btn-primary" type="submit">Save my quiz</button>
+        <p id="quizSaveMessage" aria-live="polite"></p>
+      </form>
+    </article>
+
+    <article class="card study-tool study-notes">
+      <h3>📚 My saved notes</h3>
+      <p>Your personal revision library. Save a note and return to it later.</p>
+
+      <form id="noteForm">
+        <label for="noteTitle">Note title</label>
+        <input id="noteTitle" maxlength="100"
+               placeholder="e.g. Mathematics — functions" required>
+
+        <label for="noteContent">Note content</label>
+        <textarea id="noteContent" maxlength="5000" rows="5"
+                  placeholder="Write your notes here..." required></textarea>
+
+        <button class="btn btn-primary" type="submit">Save note</button>
+        <p id="noteFeedback" aria-live="polite"></p>
+      </form>
+
+      <h4>Your library</h4>
+      <div id="savedNotes" class="saved-notes">
+        <p class="muted">Your notes will appear here.</p>
+      </div>
+    </article>
+
+    <article class="card study-tool">
+      <h3>🧩 My quizzes</h3>
+      <p>Take quizzes you have created and check your answers.</p>
+      <div id="savedQuizzes">
+        <p class="muted">Your saved quizzes will appear here.</p>
+      </div>
+    </article>
+  </div>
+</div>   
+
+  <div class="study-stats">
+    <article class="study-stat">
+      <span>⏱️</span>
+      <p>Focus minutes</p>
+      <strong id="focusMinutes">0</strong>
+    </article>
+    <article class="study-stat">
+      <span>🧠</span>
+      <p>Quiz points</p>
+      <strong id="quizPoints">0</strong>
+    </article>
+    <article class="study-stat">
+      <span>📝</span>
+      <p>Notes saved</p>
+      <strong id="notesCount">0</strong>
+    </article>
+  </div>
+
+  <div class="study-tools">
+    <article class="card study-tool">
+      <span class="resource-icon">⏳</span>
+      <h3>Focus timer</h3>
+      <p>Choose a duration and give one task your attention.</p>
+      <div class="timer-display" id="timerDisplay">25:00</div>
+      <div class="study-controls">
+        <button class="btn btn-primary" id="startTimer" type="button">Start</button>
+        <button class="btn btn-soft" id="resetTimer" type="button">Reset</button>
+      </div>
+      <label for="timerLength">Session length</label>
+      <select id="timerLength">
+        <option value="15">15 minutes</option>
+        <option value="25" selected>25 minutes</option>
+        <option value="45">45 minutes</option>
+      </select>
+      <p class="muted small" id="timerMessage" aria-live="polite">Ready when you are!</p>
+    </article>
+
+```
+<article class="card study-tool">
+  <span class="resource-icon">🧠</span>
+  <h3>Quick quiz</h3>
+  <p id="quizQuestion">Which planet is known as the Red Planet?</p>
+  <div id="quizAnswers" class="quiz-answers">
+    <button type="button" class="quiz-option" data-answer="wrong">Venus</button>
+    <button type="button" class="quiz-option" data-answer="correct">Mars</button>
+    <button type="button" class="quiz-option" data-answer="wrong">Jupiter</button>
+    <button type="button" class="quiz-option" data-answer="wrong">Mercury</button>
+  </div>
+  <p id="quizFeedback" class="muted small" aria-live="polite">Choose your answer!</p>
+  <button class="btn btn-soft" id="nextQuestion" type="button">Next question →</button>
+</article>
+
+<article class="card study-tool">
+  <span class="resource-icon">🌟</span>
+  <h3>Today's challenge</h3>
+  <p id="dailyChallenge">Explain one thing you learned today in three sentences, without looking at your notes.</p>
+  <button class="btn btn-primary" id="completeChallenge" type="button">Mark completed ✓</button>
+  <p id="challengeFeedback" class="muted small" aria-live="polite">Every little effort counts.</p>
+</article>
+
+<article class="card study-tool study-notes">
+  <span class="resource-icon">📝</span>
+  <h3>My revision notes</h3>
+  <p>Write a reminder, formula or idea you want to remember.</p>
+  <label for="noteTitle">Note title</label>
+  <input id="noteTitle" maxlength="70" placeholder="e.g. Physics — forces">
+  <label for="noteContent">Your notes</label>
+  <textarea id="noteContent" maxlength="3000" rows="4" placeholder="Write your notes here..."></textarea>
+  <button class="btn btn-primary" id="saveNote" type="button">Save note</button>
+  <p id="noteFeedback" class="muted small" aria-live="polite"></p>
+  <div id="savedNotes" class="saved-notes"></div>
+</article>
+```
+
+  </div>
+</div>
+
+    </section>
+
+    <aside class="rightbar">
+      <div class="card quote-card">
+        <span class="quote-mark">“</span>
+        <p>Alone we can do so little; together we can do so much.</p>
+        <small>— Helen Keller</small>
+      </div>
+      <div class="card trend-card">
+        <h3>🌟 Little reminders</h3>
+        <p>💜 Ask questions without fear.</p>
+        <p>🌷 Celebrate other people's progress.</p>
+        <p>✨ Your pace is still progress.</p>
+      </div>
+      <div class="footer-note">StudentHub · Learn • Connect • Grow</div>
+    </aside>
+  </main>
+
+  <div id="authModal" class="modal hidden" role="dialog"
+       aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-box">
+      <button id="closeModal" class="close-btn" aria-label="Close">×</button>
+      <div class="modal-logo">S</div>
+      <span class="eyebrow">WELCOME TO YOUR COMMUNITY</span>
+      <h2 id="authTitle">Your next chapter starts here.</h2>
+      <p class="muted">Create a local demo profile to explore StudentHub.</p>
+      <form id="authForm" class="profile-form">
+        <label for="authName">Display name</label>
+        <input id="authName" maxlength="40" placeholder="Your name or nickname" required>
+        <label for="authSchool">School / learning level</label>
+        <input id="authSchool" maxlength="80" placeholder="e.g. Secondary school">
+        <label for="authSubject">Favourite subject</label>
+        <input id="authSubject" maxlength="60" placeholder="e.g. Science">
+        <button class="btn btn-primary full" type="submit">Enter StudentHub ✨</button>
+      </form>
+      <p class="muted small">Use a nickname. Don't enter a password or sensitive personal details in this demo.</p>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <footer class="mobile-footer">StudentHub · A brighter way to learn ♡</footer>
+  <script src="script.js"></script>
+</body>
+</html>
